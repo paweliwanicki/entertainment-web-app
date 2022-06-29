@@ -1,0 +1,27 @@
+@use '../../../style/default.scss';
+
+.customHeader {
+  font-size: 3.25rem;
+  font-family: default.$font-family-light;
+  color: default.$white;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 3.85rem;
+
+  .greenLightColor {
+    color: default.$green;
+  }
+
+  @include default.respond-to(bp-small) {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+
+  @include default.respond-to(bp-very-small) {
+    font-size: 1.625rem;
+    line-height: 2.375rem;
+  }
+
+}

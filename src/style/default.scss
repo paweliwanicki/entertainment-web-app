@@ -1,0 +1,45 @@
+// colors
+$white: #FFF;
+$blue-light: #C2CBE5;
+$blue: #5A668A;
+$blue-middle: #2C344B;
+$blue-dark: #121725;
+$green: #54E6AF;
+
+// fonts
+$font-family-light: 'Chivo Light',sans-serif;
+$font-family-regular: 'Chivo Regular', sans-serif;
+$font-family-bold: 'Chivo Bold', sans-serif;
+
+// buttons 
+$button-primary-color: #54E6AF;
+$button-primary-h-color: #B3FFE2;
+$button-primary-disabled-color: #97d6be;
+$button-box-shadow-color: #54e6af33;
+$button-text-color: #121725;
+
+// validation
+$isValid-color: #7fff00;
+$isInvalid-color: #FB3E3E;
+
+// general input
+$input-placeholder-color: #b4b2b2;
+
+// media query breakpoints 
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == bp-very-small {
+    @media only screen and (max-width: 30.75em) { @content }; 
+  }
+
+  @if $breakpoint == bp-small {
+    @media only screen and (max-width: 48.05em) { @content }; 
+  }
+
+  @if $breakpoint == bp-medium {
+    @media only screen and (max-width: 62.5em) { @content }; 
+  }
+
+  @if $breakpoint == bp-large {
+    @media only screen and (max-width: 80.5em) { @content }; 
+  }
+}

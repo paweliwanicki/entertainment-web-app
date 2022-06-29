@@ -1,0 +1,40 @@
+@use '../../style/default.scss';
+
+.logo {
+  transform: translateY(-50%);
+  position: absolute;
+
+  @include default.respond-to(bp-small) {
+    transform: unset;
+    top: 50px;
+  }
+
+  @include default.respond-to(bp-very-small) {
+    position: static;
+    transform: unset;
+  }
+}
+
+.dots {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(50%);
+  width: 235px;
+  height: auto;
+
+  @media only screen and (min-width:48.05em) and (max-width: 51.25em) {
+    width: 190px;
+  }
+
+  @include default.respond-to(bp-small) {
+    left: 0;
+    right: auto;
+    transform: translate(-5%, 100%);
+  }
+
+  @include default.respond-to(bp-very-small) {
+    display: none;
+  }
+
+}

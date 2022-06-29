@@ -1,0 +1,88 @@
+@use '../../../style/default.scss';
+
+.inputContainer {
+  position: relative;
+
+  .customInputLoader {
+    position: absolute;
+    right: .3em;
+    top: 1em;
+    width: 26px;
+    height: 26px;
+
+    @include default.respond-to(bp-very-small) {
+      top: .65em;
+      right: .65em;
+    }
+  }
+
+  @include default.respond-to(bp-very-small) {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .customLabel {
+    padding: 0 0 0 2em;
+    display: block;
+    line-height: 1em;
+    font-size: .9em;
+    margin-top: .4em;
+    position: absolute;
+    width: 300px;
+
+    @include default.respond-to(bp-very-small) {
+      white-space: normal;
+      top: 7.5em;
+      width: 100%;
+      padding-left: 0;
+      text-align: center;
+      font-family: default.$font-family-regular;
+    }
+  }
+
+  .customInput {
+    width: 350px;
+    max-width: 350px;
+    background-color: Transparent;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    max-width: 350px;
+    padding: .8em 2em;
+    line-height: 2em;
+    font-size: 1em;
+    color: default.$white;
+    font-weight: 500;
+    font-family: default.$font-family-regular;
+
+    &::placeholder {
+      color: default.$input-placeholder-color;
+    }
+
+    @include default.respond-to(bp-small) {
+      max-width: 425px;
+      width: auto;
+    }
+
+    @media only screen and (max-width:36.85em) {
+      width: 220px;
+    }
+
+    @include default.respond-to(bp-very-small) {
+      width: 100%;
+      background-color: default.$blue-middle;
+      border-radius: 2em;
+      height: 46px;
+      max-width: 100%;
+    }
+  }
+}
+
+.isValid {
+  color: default.$isValid-color;
+}
+
+.isInvalid {
+  color: default.$isInvalid-color;
+}

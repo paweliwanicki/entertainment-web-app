@@ -1,0 +1,27 @@
+@use '../../../style/default.scss';
+
+.textBox {
+  font-size: 1.15em;
+  line-height: 1.75em;
+  max-width: 445px;
+  margin-bottom: 2.5em;
+  color: default.$white;
+
+  p {
+    margin: 0;
+  }
+
+  .green {
+    color: default.$green;
+  }
+
+  .blueLight {
+    color: default.$blue-light;
+  }
+
+  @include default.respond-to(bp-very-small) {
+    font-size: .9rem;
+    line-height: 1.56rem;
+    margin-bottom: 0;
+  }
+}

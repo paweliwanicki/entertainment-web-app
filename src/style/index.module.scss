@@ -1,0 +1,20 @@
+@use "./fonts.scss";
+@use "./default.scss";
+
+body {
+  margin: 0;
+  background-color: default.$blue-dark;
+  height: 100%;
+  width: 100%;
+  font-family: default.$font-family-light;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
+  @include default.respond-to(bp-very-small) {
+    min-height: 100vh;
+  }
+}

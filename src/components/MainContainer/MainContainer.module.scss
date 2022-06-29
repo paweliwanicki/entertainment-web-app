@@ -1,0 +1,47 @@
+@use '../../style/default.scss';
+
+.mainContainer {
+  flex: 1 1 100%;
+  display: flex;
+  position: relative;
+  //background-image: url('../../images/desktop/image-host.jpg');
+  background-position: top right;
+  background-size: auto;
+  background-repeat: no-repeat;
+  margin-top: 130px;
+  margin-left: 165px;
+  margin-right: 0;
+  height: 640px;
+  max-width: 1275px;
+
+
+  @media only screen and (min-width:48.05em) and (max-width:59.375em) {
+    margin-left: 2.5em;
+  }
+
+  @include default.respond-to(bp-small) {
+    margin-left: 2.5em;
+    //background-image: url('../../images/tablet/image-host.jpg');
+    margin-top: 0;
+    height: fit-content;
+  }
+
+  @include default.respond-to(bp-very-small) {
+    //background-image: url('../../images/mobile/image-host.jpg');
+    background-color: default.$blue;
+    background-blend-mode: multiply;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: 0;
+    background-position: center;
+    background-size: cover;
+    min-height: 640px;
+    height: 100vh;
+    padding: 0 1.5rem;
+    justify-content: space-evenly;
+  }
+
+
+}
