@@ -1,0 +1,22 @@
+@use '../../style/default.scss';
+
+.layout {
+  flex: 1 1 100%;
+  background-color: default.$blue-dark;
+  height: 100vh;
+
+  .loginFormContainer {
+    margin: auto;
+
+    svg {
+      margin: 79px auto 83px auto;
+    }
+
+  }
+
+  @include default.respond-to(bp-small) {}
+
+  @include default.respond-to(bp-very-small) {}
+
+
+}

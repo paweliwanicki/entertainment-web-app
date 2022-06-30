@@ -3,18 +3,24 @@
 .customButton {
   color: default.$button-text-color;
   border-radius: 2em;
-  background-color: default.$button-primary-color;
   outline: 0;
-  box-shadow: 0px 25px 20px -20px default.$button-box-shadow-color;
-  line-height: 2em;
-  padding: 0.7em 2em;
+  line-height: 19px;
+  // padding: 14px 2em;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  font-family: default.$font-family-regular;
+  font-family: default.$font-family;
   font-weight: 500;
+  height:48px;
+  font-size:15px;
+  background-color: default.$red;
+  transition: background-color 1s;
+
 
   &:hover {
     background-color: default.$button-primary-h-color;
+    color: default.$button-text-h-color;
+    transition: background-color 1s;
   }
 
   &:disabled {

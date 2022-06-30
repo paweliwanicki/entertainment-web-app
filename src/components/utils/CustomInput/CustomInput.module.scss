@@ -3,18 +3,18 @@
 .inputContainer {
   position: relative;
 
-  .customInputLoader {
-    position: absolute;
-    right: .3em;
-    top: 1em;
-    width: 26px;
-    height: 26px;
+  // .customInputLoader {
+  //   position: absolute;
+  //   right: .3em;
+  //   top: 1em;
+  //   width: 26px;
+  //   height: 26px;
 
-    @include default.respond-to(bp-very-small) {
-      top: .65em;
-      right: .65em;
-    }
-  }
+  //   @include default.respond-to(bp-very-small) {
+  //     top: .65em;
+  //     right: .65em;
+  //   }
+  // }
 
   @include default.respond-to(bp-very-small) {
     width: 100%;
@@ -23,13 +23,12 @@
   }
 
   .customLabel {
-    padding: 0 0 0 2em;
-    display: block;
-    line-height: 1em;
-    font-size: .9em;
-    margin-top: .4em;
+
     position: absolute;
-    width: 300px;
+    top: 0px;
+    right: 0;
+    font-family: default.$font-family;
+
 
     @include default.respond-to(bp-very-small) {
       white-space: normal;
@@ -37,27 +36,48 @@
       width: 100%;
       padding-left: 0;
       text-align: center;
-      font-family: default.$font-family-regular;
     }
   }
 
   .customInput {
-    width: 350px;
-    max-width: 350px;
+    width: 100%;
+    max-width: 100%;
     background-color: Transparent;
     outline: none;
-    border: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid default.$blue;
     box-sizing: border-box;
-    max-width: 350px;
-    padding: .8em 2em;
-    line-height: 2em;
-    font-size: 1em;
+    padding: 2px 16px 16px 16px;
+    line-height: 19px;
+    font-size: 15px;
     color: default.$white;
     font-weight: 500;
-    font-family: default.$font-family-regular;
+    height: 37px;
+    //position: relative;
+    font-family: default.$font-family;
+
 
     &::placeholder {
       color: default.$input-placeholder-color;
+      opacity: 0.5;
+      //position: relative;
+      // bottom: 8px;
+    }
+
+
+    &:focus,
+    &:active {
+      color: default.$white;
+      opacity: 1;
+      border-bottom: 1px solid default.$white;
+
+      &::placeholder {
+        color: default.$white;
+        ;
+        opacity: 1;
+      }
     }
 
     @include default.respond-to(bp-small) {
@@ -84,5 +104,6 @@
 }
 
 .isInvalid {
-  color: default.$isInvalid-color;
+  color: default.$red;
+  border-color: default.$red;
 }

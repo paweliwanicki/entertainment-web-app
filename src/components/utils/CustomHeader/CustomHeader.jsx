@@ -4,8 +4,7 @@ import propTypes from "prop-types";
 const CustomHeader = (props) => {
   return (
     <h2 className={classes.customHeader}>
-      <span className={classes.greenLightColor}>{props.mainText}</span>{" "}
-      {props.text}
+      {props.mainText}
     </h2>
   );
 };

@@ -3,11 +3,11 @@ import propTypes from "prop-types";
 import Loader from "../Loader/Loader";
 
 const CustomInput = (props) => {
+
   const validClassName = props.isValid ? classes.isValid : classes.isInvalid;
   const isValidated = props.isValidated;
-  const validKey = props.isValid ? "success" : "error";
-  const validationText = props.validationsText[validKey];
-
+  const validationText = props.validationText;
+  
   return (
     <div className={classes.inputContainer}>
       <input
@@ -23,7 +23,7 @@ const CustomInput = (props) => {
       {props.isSending && props.showLoader && (
         <Loader className={classes.customInputLoader} />
       )}
-      {isValidated ? (
+      {isValidated && !props.isValid ? (
         <label
           className={[classes.customLabel, validClassName].join(" ")}
           htmlFor={props.id}
@@ -42,5 +42,12 @@ CustomInput.propTypes = {
   placeholder: propTypes.string,
   ref: propTypes.string,
 };
+
+CustomInput.defaultProps = {
+  type: 'text',
+  value: undefined,
+  placeholder: '',
+  ref: null,
+}
 
 export default CustomInput;

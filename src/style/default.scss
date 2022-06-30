@@ -1,22 +1,21 @@
 // colors
 $white: #FFF;
 $blue-light: #C2CBE5;
-$blue: #5A668A;
-$blue-middle: #2C344B;
-$blue-dark: #121725;
+$blue: #5A698F;
+$blue-middle: #161D2F;
+$blue-dark: #10141E;
 $green: #54E6AF;
+$red: #FC4747;
 
 // fonts
-$font-family-light: 'Chivo Light',sans-serif;
-$font-family-regular: 'Chivo Regular', sans-serif;
-$font-family-bold: 'Chivo Bold', sans-serif;
+$font-family:'Outfit', sans-serif;
 
 // buttons 
-$button-primary-color: #54E6AF;
-$button-primary-h-color: #B3FFE2;
-$button-primary-disabled-color: #97d6be;
-$button-box-shadow-color: #54e6af33;
-$button-text-color: #121725;
+$button-primary-color: $red;
+$button-primary-h-color: $white;
+$button-primary-disabled-color: #b1b1b1;
+$button-text-color: $white;
+$button-text-h-color: $blue-middle;
 
 // validation
 $isValid-color: #7fff00;

@@ -5,7 +5,7 @@ const MainContainer = (props) => {
 
   return (
     <div className={classes.mainContainer}>
-
+        
     </div>
   );
 };

@@ -1,11 +1,12 @@
 @use '../../../style/default.scss';
 
 .textBox {
-  font-size: 1.15em;
-  line-height: 1.75em;
-  max-width: 445px;
-  margin-bottom: 2.5em;
+  font-size: inherit;
+  line-height: inherit;
   color: default.$white;
+  display: flex; 
+  justify-content: center;
+  font-family: default.$font-family;
 
   p {
     margin: 0;
