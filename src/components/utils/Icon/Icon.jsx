@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import propTypes from "prop-types";
 import Icons from "../../../images/icons/svg-sprite.svg";
 
@@ -17,7 +17,6 @@ const Icon = (props) => {
   useEffect(() => {
     setColor(props.color);
   }, [props.color]);
-  console.log(props.id);
 
   return (
     <svg

@@ -1,0 +1,82 @@
+@use '../../style/default.scss';
+
+.loginPage {
+  display: flex;
+  width: 400px;
+  padding: 32px;
+  margin: auto;
+  background-color: default.$blue-middle;
+  border-radius: 20px;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  form {
+
+    font-weight: 300;
+
+    button {
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    .marginTop24px {
+      margin-top: 24px;
+    }
+
+  }
+
+  .loginForm,
+  .signupForm {
+
+    .changeFormBox {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 19px;
+      font-weight: 300;
+
+      .changeFormLink {
+        color: default.$red;
+        text-decoration: none;
+        margin-left: 8px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .fadeIn {
+    animation: fadeInAnimation 1s;
+  }
+
+  @keyframes fadeInAnimation {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @include default.respond-to(bp-small) {}
+
+  @include default.respond-to(bp-very-small) {}
+
+
+  // /* This fires as soon as the element enters the DOM */
+  // .listTransitionEnter {}
+
+  // /* This is where we can add the transition*/
+  // .listTransitionEnterActive {}
+
+  // /* This fires as soon as the this.state.showList is false */
+  // .listTransitionExit {}
+
+  // /* fires as element leaves the DOM*/
+  // .listTransitionExitActive {}
+
+}

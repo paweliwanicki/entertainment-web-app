@@ -2,11 +2,13 @@ import classes from "./TextBox.module.scss";
 import propTypes from "prop-types";
 
 const TextBox = (props) => {
-  // define color in style -> default #fff
   const textColor = props.color;
+  const classNames = props.classNames
+    ? [classes.textBox, props.classNames].join(" ")
+    : classes.textBox;
 
   return (
-    <div className={classes.textBox}>
+    <div className={classNames}>
       <p className={classes[textColor]}>{props.text}</p>
       {props.children}
     </div>
@@ -20,8 +22,8 @@ TextBox.propTypes = {
 };
 
 TextBox.defaultProps = {
-  color: '',
+  color: "",
   children: null,
-}
+};
 
 export default TextBox;

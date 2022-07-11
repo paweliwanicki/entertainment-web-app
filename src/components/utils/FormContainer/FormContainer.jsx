@@ -4,7 +4,6 @@ const FormContainer = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const valid = props.onSubmitHandler();
-    console.log(valid);
     return valid;
   };
 
@@ -17,6 +16,12 @@ const FormContainer = (props) => {
 
 FormContainer.propTypes = {
   children: propTypes.node,
+  onSubmit: propTypes.func,
+};
+
+FormContainer.defaultProps = {
+  children: null,
+  onSubmit: null,
 };
 
 export default FormContainer;

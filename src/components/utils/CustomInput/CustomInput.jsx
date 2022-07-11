@@ -1,29 +1,42 @@
-import  classes from "./CustomInput.module.scss";
+import classes from "./CustomInput.module.scss";
 import propTypes from "prop-types";
 import Loader from "../Loader/Loader";
 
 const CustomInput = (props) => {
+  let validClassName = "";
+  if (props.isValidated) {
+    validClassName = props.isValid ? classes.isValid : classes.isInvalid;
+  }
 
-  const validClassName = props.isValid ? classes.isValid : classes.isInvalid;
-  const isValidated = props.isValidated;
+  const defaultClassNames =
+    validClassName !== ""
+      ? [classes.inputContainer, validClassName].join(" ")
+      : classes.inputContainer;
+
+  const classNames = props.classNames
+    ? [defaultClassNames, props.classNames].join(" ")
+    : defaultClassNames;
+
+  let inputClassNames = [classes.customInput, validClassName].join(" ");
+
   const validationText = props.validationText;
-  
   return (
-    <div className={classes.inputContainer}>
+    <div className={classNames}>
       <input
         id={props.id}
-        className={classes.customInput}
+        className={inputClassNames}
         type={props.type}
         value={props.value}
         placeholder={props.placeholder}
         ref={props.inputRef}
         onBlur={props.onBlur}
         onChange={props.onChange}
+        autoComplete={props.autoComplete}
       />
       {props.isSending && props.showLoader && (
         <Loader className={classes.customInputLoader} />
       )}
-      {isValidated && !props.isValid ? (
+      {props.isValidated && !props.isValid ? (
         <label
           className={[classes.customLabel, validClassName].join(" ")}
           htmlFor={props.id}
@@ -44,10 +57,10 @@ CustomInput.propTypes = {
 };
 
 CustomInput.defaultProps = {
-  type: 'text',
+  type: "text",
   value: undefined,
-  placeholder: '',
+  placeholder: "",
   ref: null,
-}
+};
 
 export default CustomInput;

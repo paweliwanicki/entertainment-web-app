@@ -16,6 +16,15 @@
   //   }
   // }
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-internal-autofill-selected,
+  input:-internal-autofill-previewed {
+    background-color: transparent !important;
+    color: default.$white;
+  }
+
   @include default.respond-to(bp-very-small) {
     width: 100%;
     max-width: 100%;
@@ -23,12 +32,12 @@
   }
 
   .customLabel {
-
     position: absolute;
-    top: 0px;
-    right: 0;
+    top: calc(50% - 16px/2 - 8.5px);
+    right: 16px;
     font-family: default.$font-family;
-
+    font-size: 13px;
+    line-height: 16px;
 
     @include default.respond-to(bp-very-small) {
       white-space: normal;
@@ -42,28 +51,30 @@
   .customInput {
     width: 100%;
     max-width: 100%;
-    background-color: Transparent;
+    background-color: transparent;
     outline: none;
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid default.$blue;
     box-sizing: border-box;
     padding: 2px 16px 16px 16px;
     line-height: 19px;
     font-size: 15px;
     color: default.$white;
-    font-weight: 500;
+    font-weight: inherit;
     height: 37px;
-    //position: relative;
     font-family: default.$font-family;
 
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-internal-autofill-selected {
+      background-color: transparent !important;
+    }
 
     &::placeholder {
       color: default.$input-placeholder-color;
       opacity: 0.5;
-      //position: relative;
-      // bottom: 8px;
     }
 
 
@@ -101,9 +112,11 @@
 
 .isValid {
   color: default.$isValid-color;
+  border-bottom: 1px solid default.$blue;
 }
 
 .isInvalid {
   color: default.$red;
   border-color: default.$red;
+  caret-color: default.$red;
 }
