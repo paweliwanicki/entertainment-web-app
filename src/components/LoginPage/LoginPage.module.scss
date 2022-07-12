@@ -1,4 +1,5 @@
 @use '../../style/default.scss';
+@use '../../style/animations.scss';
 
 .loginPage {
   display: flex;
@@ -10,23 +11,21 @@
   flex-direction: column;
   box-sizing: border-box;
 
-  form {
-
-    font-weight: 300;
-
-    button {
-      margin-top: 40px;
-      width: 100%;
-    }
-
-    .marginTop24px {
-      margin-top: 24px;
-    }
-
-  }
-
   .loginForm,
   .signupForm {
+
+    form {
+      font-weight: 300;
+
+      button {
+        margin-top: 40px;
+        width: 100%;
+      }
+
+      .customInput {
+        margin-top: 24px;
+      }
+    }
 
     .changeFormBox {
       margin-top: 24px;
@@ -48,35 +47,8 @@
     }
   }
 
-  .fadeIn {
-    animation: fadeInAnimation 1s;
-  }
-
-  @keyframes fadeInAnimation {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
   @include default.respond-to(bp-small) {}
 
   @include default.respond-to(bp-very-small) {}
-
-
-  // /* This fires as soon as the element enters the DOM */
-  // .listTransitionEnter {}
-
-  // /* This is where we can add the transition*/
-  // .listTransitionEnterActive {}
-
-  // /* This fires as soon as the this.state.showList is false */
-  // .listTransitionExit {}
-
-  // /* fires as element leaves the DOM*/
-  // .listTransitionExitActive {}
 
 }

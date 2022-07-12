@@ -1,10 +1,10 @@
 import propTypes from "prop-types";
 
 const FormContainer = (props) => {
+  
   const submitHandler = (e) => {
     e.preventDefault();
-    const valid = props.onSubmitHandler();
-    return valid;
+    props.onSubmitHandler();
   };
 
   return (

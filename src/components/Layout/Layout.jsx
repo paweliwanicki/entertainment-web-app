@@ -1,20 +1,21 @@
+import { useSelector } from "react-redux";
 import LoginPage from "../LoginPage/LoginPage";
 import MainContainer from "../MainContainer/MainContainer";
 import Icon from "../utils/Icon/Icon";
 import classes from "./Layout.module.scss";
+import { isAuth } from "../../reducers/authorizationSlice";
 
 function Layout() {
-  const isAuth = false;
-
+  const isAuthenticated = useSelector(isAuth);
   return (
     <div className={classes.layout}>
-      {!isAuth && (
+      {!isAuthenticated && (
         <div className={classes.loginFormContainer}>
           <Icon id="logo" width={32} height={26} />
           <LoginPage />
         </div>
       )}
-      {isAuth && <MainContainer />}
+      {isAuthenticated && <MainContainer />}
     </div>
   );
 }

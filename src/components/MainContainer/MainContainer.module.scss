@@ -3,17 +3,6 @@
 .mainContainer {
   flex: 1 1 100%;
   display: flex;
-  position: relative;
-  //background-image: url('../../images/desktop/image-host.jpg');
-  background-position: top right;
-  background-size: auto;
-  background-repeat: no-repeat;
-  margin-top: 130px;
-  margin-left: 165px;
-  margin-right: 0;
-  height: 640px;
-  max-width: 1275px;
-
 
   @media only screen and (min-width:48.05em) and (max-width:59.375em) {
     margin-left: 2.5em;

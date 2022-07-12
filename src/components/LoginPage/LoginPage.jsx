@@ -6,7 +6,6 @@ import classes from "./LoginPage.module.scss";
 const LOGIN_FORM = "login";
 const SIGNUP_FORM = "signup";
 
-
 const LoginPage = (props) => {
   const [form, setForm] = useState(LOGIN_FORM);
 

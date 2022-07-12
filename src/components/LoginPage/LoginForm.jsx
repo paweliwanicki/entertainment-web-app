@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import classes from "./LoginPage.module.scss";
 import Button from "../utils/Button/Button";
 import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
+import { isAuthenticated } from "../../reducers/authorizationSlice";
 
 const LoginForm = (props) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +26,11 @@ const LoginForm = (props) => {
     setEmailIsValidated(true);
     setPasswordIsValid(validPassword);
     setPasswordIsValidated(true);
-    return emailIsValid && passwordIsValid;
+    return validEmail && validPassword;
+  };
+
+  const loginHandler = () => {
+    validateForm() && dispatch(isAuthenticated(true));
   };
 
   return (
@@ -31,7 +39,7 @@ const LoginForm = (props) => {
 
       <FormContainer
         classes={classes.formContainer}
-        onSubmitHandler={validateForm}
+        onSubmitHandler={loginHandler}
       >
         <CustomInput
           id="email"
@@ -46,7 +54,7 @@ const LoginForm = (props) => {
           onBlur={() => setEmailIsValidated(false)}
         />
         <CustomInput
-          classNames={classes.marginTop24px}
+          classNames={classes.customInput}
           id="password"
           name="password"
           type="password"

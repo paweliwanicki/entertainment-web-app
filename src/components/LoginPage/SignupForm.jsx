@@ -36,11 +36,10 @@ const SignupForm = (props) => {
     setEmailIsValidated(true);
     setPasswordIsValidated(true);
     setPassword2IsValidated(true);
-    return emailIsValid && passwordIsValid && password2IsValid;
+    return validEmail && validPassword && validPassword2;
   };
 
   return (
-
     <div className={[classes.signupForm, classes.fadeIn].join(" ")}>
       <CustomHeader mainText="Sign up" />
       <FormContainer
@@ -70,7 +69,7 @@ const SignupForm = (props) => {
           isValid={passwordIsValid}
           isValidated={passwordIsValidated}
           autoComplete="on"
-          classNames={classes.marginTop24px}
+          classNames={classes.customInput}
         />
 
         <CustomInput
@@ -84,7 +83,7 @@ const SignupForm = (props) => {
           isValid={password2IsValid}
           isValidated={password2IsValidated}
           autoComplete="on"
-          classNames={classes.marginTop24px}
+          classNames={classes.customInput}
         />
         <Button type="submit" text="Create an account" />
       </FormContainer>
