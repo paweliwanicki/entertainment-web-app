@@ -10,6 +10,11 @@
   border-radius: 20px;
   flex-direction: column;
   box-sizing: border-box;
+  min-height: 373px;
+
+  .loader {
+    margin: auto;
+  }
 
   .loginForm,
   .signupForm {
@@ -49,6 +54,7 @@
 
   @include default.respond-to(bp-small) {}
 
-  @include default.respond-to(bp-very-small) {}
-
+  @include default.respond-to(bp-very-small) {
+    width: 94%;
+  }
 }

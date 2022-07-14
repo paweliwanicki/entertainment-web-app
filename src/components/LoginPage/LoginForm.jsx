@@ -6,7 +6,11 @@ import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
-import { isAuthenticated } from "../../reducers/authorizationSlice";
+import {
+  setIsAuthenticated,
+  setIsSigning,
+} from "../../reducers/authorizationSlice";
+import request from "../..//utils/APIHandler";
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
@@ -30,7 +34,18 @@ const LoginForm = (props) => {
   };
 
   const loginHandler = () => {
-    validateForm() && dispatch(isAuthenticated(true));
+    // simulate login api handler -> for test cases
+    const valid = validateForm();
+    dispatch(setIsSigning(true));
+    if (valid) {
+      return dispatch(() => {
+        const loginRequest = request();
+        return loginRequest.then(() => {
+          dispatch(setIsSigning(false));
+          dispatch(setIsAuthenticated(true));
+        });
+      });
+    }
   };
 
   return (

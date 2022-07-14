@@ -92,21 +92,12 @@
       }
     }
 
-    @include default.respond-to(bp-small) {
-      max-width: 425px;
-      width: auto;
-    }
-
-    @media only screen and (max-width:36.85em) {
-      width: 220px;
-    }
-
     @include default.respond-to(bp-very-small) {
-      width: 100%;
-      background-color: default.$blue-middle;
-      border-radius: 2em;
-      height: 46px;
-      max-width: 100%;
+      // width: 100%;
+      // background-color: default.$blue-middle;
+      // border-radius: 2em;
+      // height: 46px;
+      // max-width: 100%;
     }
   }
 }

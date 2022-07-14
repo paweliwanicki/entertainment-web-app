@@ -27,7 +27,7 @@ $input-placeholder-color: #b4b2b2;
 // media query breakpoints 
 @mixin respond-to($breakpoint) {
   @if $breakpoint == bp-very-small {
-    @media only screen and (max-width: 30.75em) { @content }; 
+    @media only screen and (max-width: 28em) { @content }; 
   }
 
   @if $breakpoint == bp-small {
