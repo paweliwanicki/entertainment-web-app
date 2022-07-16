@@ -17,9 +17,13 @@ const CustomInput = (props) => {
     ? [defaultClassNames, props.classNames].join(" ")
     : defaultClassNames;
 
-  let inputClassNames = [classes.customInput, validClassName].join(" ");
+  const inputClassNames = [classes.customInput, validClassName].join(" ");
 
   const validationText = props.validationText;
+  let labelText = "";
+  //const labelInfo = props.labelInfoText;
+  //labelText = labelInfo ? <FaBeer title={labelInfo} /> : "";
+
   return (
     <div className={classNames}>
       <input
@@ -43,7 +47,11 @@ const CustomInput = (props) => {
         >
           {validationText}
         </label>
-      ) : null}
+      ) : (
+        <label className={classes.customLabel} htmlFor={props.id}>
+          {labelText}
+        </label>
+      )}
     </div>
   );
 };

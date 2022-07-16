@@ -5,8 +5,13 @@ import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
+import {auth} from '../../firebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const SignupForm = (props) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -28,8 +33,11 @@ const SignupForm = (props) => {
 
   const validateForm = () => {
     const validEmail = email !== "" && validateEmailAddress(email);
-    const validPassword = password !== "";
+    const validPassword = password !== "" && validatePassword(password);
     const validPassword2 = password2 !== "" && password === password2;
+
+    validatePassword(password);
+
     setEmailIsValid(validEmail);
     setPasswordIsValid(validPassword);
     setPassword2IsValid(validPassword2);
@@ -39,12 +47,39 @@ const SignupForm = (props) => {
     return validEmail && validPassword && validPassword2;
   };
 
+  const validatePassword = (password) => {
+      const regex = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()~¥=_+}{":;'?/>.<,`\-|[\]]{6,50}$/;
+      return regex.test(password);
+  }
+
+
+  const registerNewUser = () => {
+      const isValid = validateForm();
+      console.log(isValid)
+      if(isValid) {
+        try {
+          //const res = dispatch(() => createUserWithEmailAndPassword(auth, email, password2));
+          //console.log(res)
+          // const user = res.user;
+          // await addDoc(collection(db, "users"), {
+            //   uid: user.uid,
+        //   name,
+        //   authProvider: "local",
+        //   email,
+        // });
+      } catch (err) {
+       // console.error(err);
+        alert(err.message);
+      }
+    } 
+  }
+
   return (
     <div className={[classes.signupForm, classes.fadeIn].join(" ")}>
       <CustomHeader mainText="Sign up" />
       <FormContainer
         classes={classes.formContainer}
-        onSubmitHandler={validateForm}
+        onSubmitHandler={registerNewUser}
       >
         <CustomInput
           id="email"
@@ -70,6 +105,7 @@ const SignupForm = (props) => {
           isValidated={passwordIsValidated}
           autoComplete="on"
           classNames={classes.customInput}
+          labelInfoText="Password must containt at least 6 chars length,1 number and 1 special character"
         />
 
         <CustomInput

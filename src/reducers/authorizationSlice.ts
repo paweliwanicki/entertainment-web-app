@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import AuthSlice from "../types/authSlice";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 const initialState: AuthSlice = {
   isAuth: false,
@@ -18,6 +19,12 @@ export const authorizationSlice = createSlice({
     setIsSigning: (state, action) => {
       state.isSigning = action.payload;
     },
+    loginUser: (state,action) => {
+      
+    },
+    signUpUser: (state,action) => {
+      
+    }
   },
 });
 

@@ -7,10 +7,20 @@ import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
 import {
-  setIsAuthenticated,
+  //setIsAuthenticated,
   setIsSigning,
 } from "../../reducers/authorizationSlice";
 import request from "../..//utils/APIHandler";
+import {auth} from '../../firebase';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+// const logInWithEmailAndPassword = async (email, password) => {
+//   try {
+//     await signInWithEmailAndPassword(auth, email, password);
+//   } catch (err) {
+//     console.error(err);
+//     alert(err.message);
+//   }
+// };
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
@@ -36,13 +46,22 @@ const LoginForm = (props) => {
   const loginHandler = () => {
     // simulate login api handler -> for test cases
     const valid = validateForm();
+    
     dispatch(setIsSigning(true));
+    try {
+   //   await signInWithEmailAndPassword(auth, email, password);
+      dispatch(() => signInWithEmailAndPassword(auth,email,password));
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+
     if (valid) {
       return dispatch(() => {
         const loginRequest = request();
         return loginRequest.then(() => {
-          dispatch(setIsSigning(false));
-          dispatch(setIsAuthenticated(true));
+          //dispatch(setIsSigning(false));
+          //dispatch(setIsAuthenticated(true));
         });
       });
     }
