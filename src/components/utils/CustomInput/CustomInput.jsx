@@ -1,6 +1,7 @@
 import classes from "./CustomInput.module.scss";
 import propTypes from "prop-types";
 import Loader from "../Loader/Loader";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const CustomInput = (props) => {
   let validClassName = "";
@@ -21,8 +22,12 @@ const CustomInput = (props) => {
 
   const validationText = props.validationText;
   let labelText = "";
-  //const labelInfo = props.labelInfoText;
-  //labelText = labelInfo ? <FaBeer title={labelInfo} /> : "";
+  const labelInfo = props.labelInfoText;
+  labelText = labelInfo ? (
+    <div title={labelInfo}>
+      <InfoOutlinedIcon />
+    </div>
+  ) : null;
 
   return (
     <div className={classNames}>

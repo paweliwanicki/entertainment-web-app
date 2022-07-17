@@ -3,19 +3,6 @@
 .inputContainer {
   position: relative;
 
-  // .customInputLoader {
-  //   position: absolute;
-  //   right: .3em;
-  //   top: 1em;
-  //   width: 26px;
-  //   height: 26px;
-
-  //   @include default.respond-to(bp-very-small) {
-  //     top: .65em;
-  //     right: .65em;
-  //   }
-  // }
-
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -38,6 +25,18 @@
     font-family: default.$font-family;
     font-size: 13px;
     line-height: 16px;
+
+    svg {
+      color: default.$input-placeholder-color;
+      opacity: 0.5;
+      margin: auto;
+      cursor: pointer;
+
+      &:active,
+      &:hover {
+        color: default.$white;
+      }
+    }
 
     @include default.respond-to(bp-very-small) {
       white-space: normal;

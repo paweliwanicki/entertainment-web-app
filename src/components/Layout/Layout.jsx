@@ -11,7 +11,7 @@ function Layout() {
     <div className={classes.layout}>
       {!isAuthenticated && (
         <div className={classes.loginFormContainer}>
-          <Icon id="logo" width={32} height={26} />
+          <Icon id="logo" classes={classes.logo} width={32} height={26} />
           <LoginPage />
         </div>
       )}
