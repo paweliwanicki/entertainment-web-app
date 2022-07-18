@@ -5,14 +5,15 @@ import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
-import {auth} from '../../firebase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
+import { createNewUser } from "../../reducers/authorizationSlice";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("Can't be empty");
+
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -31,13 +32,20 @@ const SignupForm = (props) => {
       );
   };
 
+  const validatePassword = (password) => {
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()~¥=_+}{":;'?/>.<,`\-|[\]]{6,50}$/;
+    return regex.test(password);
+  };
+
   const validateForm = () => {
-    const validEmail = email !== "" && validateEmailAddress(email);
+    const validEmail = validateEmailAddress(email);
+    if (email !== "" && !validEmail) {
+      setEmailError("Wrong e-mail address");
+    }
     const validPassword = password !== "" && validatePassword(password);
     const validPassword2 = password2 !== "" && password === password2;
-
     validatePassword(password);
-
     setEmailIsValid(validEmail);
     setPasswordIsValid(validPassword);
     setPassword2IsValid(validPassword2);
@@ -47,32 +55,20 @@ const SignupForm = (props) => {
     return validEmail && validPassword && validPassword2;
   };
 
-  const validatePassword = (password) => {
-      const regex = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()~¥=_+}{":;'?/>.<,`\-|[\]]{6,50}$/;
-      return regex.test(password);
-  }
-
-
   const registerNewUser = () => {
-      const isValid = validateForm();
-      console.log(isValid)
-      if(isValid) {
-        try {
-          //const res = dispatch(() => createUserWithEmailAndPassword(auth, email, password2));
-          //console.log(res)
-          // const user = res.user;
-          // await addDoc(collection(db, "users"), {
-            //   uid: user.uid,
-        //   name,
-        //   authProvider: "local",
-        //   email,
-        // });
+    const isValid = validateForm();
+    if (isValid) {
+      try {
+        const newUser = {
+          email: email,
+          password: password2,
+        };
+        dispatch(createNewUser(newUser));
       } catch (err) {
-       // console.error(err);
         alert(err.message);
       }
-    } 
-  }
+    }
+  };
 
   return (
     <div className={[classes.signupForm, classes.fadeIn].join(" ")}>
@@ -88,7 +84,7 @@ const SignupForm = (props) => {
           placeholder="Email address"
           onChange={(e) => setEmail(e.target.value)}
           onBlur={() => setEmailIsValidated(false)}
-          validationText="Can't be empty"
+          validationText={emailError}
           isValid={emailIsValid}
           isValidated={emailIsValidated}
           autoComplete="off"
@@ -121,7 +117,10 @@ const SignupForm = (props) => {
           autoComplete="on"
           classNames={classes.customInput}
         />
+        {
+          
         <Button type="submit" text="Create an account" />
+        }
       </FormContainer>
       <TextBox
         text="Already have an account?"

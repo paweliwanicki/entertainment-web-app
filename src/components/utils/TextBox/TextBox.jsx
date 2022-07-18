@@ -8,7 +8,7 @@ const TextBox = (props) => {
     : classes.textBox;
 
   return (
-    <div className={classNames}>
+    <div className={classNames} onClick={props.onClick}>
       <p className={classes[textColor]}>{props.text}</p>
       {props.children}
     </div>

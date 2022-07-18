@@ -1,44 +1,38 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./LoginPage.module.scss";
 import Button from "../utils/Button/Button";
 import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
-import { SIGNUP_FORM, RESET_PASSWORD_FORM } from "../../utils/mixins";
-import { loginUser } from "../../reducers/authorizationSlice";
+import { resetPassword, getErrorCode } from "../../reducers/authorizationSlice";
+import { SIGNUP_FORM, LOGIN_FORM } from "../../utils/mixins";
 
-const LoginForm = (props) => {
+const ResetPasswordForm = (props) => {
   const dispatch = useDispatch();
 
+  const error = useSelector(getErrorCode);
+  console.log(error);
+
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const [emailIsValid, setEmailIsValid] = useState(null);
   const [emailIsValidated, setEmailIsValidated] = useState(null);
-  const [passwordIsValid, setPasswordIsValid] = useState(null);
-  const [passwordIsValidated, setPasswordIsValidated] = useState(null);
 
   const validateForm = () => {
     const validEmail = email !== "";
-    const validPassword = password !== "";
     setEmailIsValid(validEmail);
     setEmailIsValidated(true);
-    setPasswordIsValid(validPassword);
-    setPasswordIsValidated(true);
-    return validEmail && validPassword;
+    return validEmail;
   };
 
-  const loginHandler = () => {
+  const resetPasswordHandler = () => {
     const valid = validateForm();
+    console.log(valid);
     if (valid) {
       try {
-        const credentials = {
-          email: email,
-          password: password,
-        };
-        dispatch(() => loginUser(credentials));
+        dispatch(() => resetPassword(email));
       } catch (err) {
         alert(err.message);
       }
@@ -47,11 +41,12 @@ const LoginForm = (props) => {
 
   return (
     <div className={[classes.loginForm, classes.fadeIn].join(" ")}>
-      <CustomHeader mainText="Login" />
+      <CustomHeader mainText="Reset password" />
+        <TextBox text={"E-mail with password reset instruction was send. Please check your e-mail inbox."} classNames={classes.infoBox}></TextBox>
 
       <FormContainer
         classes={classes.formContainer}
-        onSubmitHandler={loginHandler}
+        onSubmitHandler={resetPasswordHandler}
       >
         <CustomInput
           id="email"
@@ -65,26 +60,19 @@ const LoginForm = (props) => {
           autoComplete="off"
           onBlur={() => setEmailIsValidated(false)}
         />
-        <CustomInput
-          classNames={classes.customInput}
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          validationText="Can't be empty"
-          isValid={passwordIsValid}
-          isValidated={passwordIsValidated}
-          autoComplete="on"
-          onBlur={() => setPasswordIsValidated(false)}
-        />
-        <TextBox
-          text="Forgot password?"
-          classNames={classes.resetPasswordLink}
-          onClick={() => props.changeFormHandler(RESET_PASSWORD_FORM)}
-        />
-        <Button type="submit" text="Login to your account" />
+        <Button type="submit" text="Send reset e-mail" />
       </FormContainer>
+      <TextBox
+        text="Already have an account?"
+        classNames={classes.changeFormBox}
+      >
+        <span
+          className={classes.changeFormLink}
+          onClick={() => props.changeFormHandler(LOGIN_FORM)}
+        >
+          Login
+        </span>
+      </TextBox>
       <TextBox text="Don’t have an account?" classNames={classes.changeFormBox}>
         <span
           className={classes.changeFormLink}
@@ -97,4 +85,4 @@ const LoginForm = (props) => {
   );
 };
 
-export default LoginForm;
+export default ResetPasswordForm;

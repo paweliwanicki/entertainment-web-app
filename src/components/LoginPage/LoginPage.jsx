@@ -1,26 +1,36 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { isSigning } from "../../reducers/authorizationSlice";
-import Loader from "../utils/Loader/Loader";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import classes from "./LoginPage.module.scss";
-
-const LOGIN_FORM = "login";
-const SIGNUP_FORM = "signup";
+import {
+  LOGIN_FORM,
+  SIGNUP_FORM,
+  RESET_PASSWORD_FORM,
+} from "../../utils/mixins";
+import ResetPasswordForm from "./ResetPasswordForm";
+import { auth } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const LoginPage = (props) => {
+  const [user, loading, error] = useAuthState(auth);
+  console.log(user,loading,error);
   const [form, setForm] = useState(LOGIN_FORM);
-  const userIsSigning = useSelector(isSigning);
+
+  const setFormHandler = (form) => {
+    setForm(form);
+  };
 
   return (
     <div className={classes.loginPage}>
-      {userIsSigning && <Loader className={classes.loader}/>}
-      {!userIsSigning && form === LOGIN_FORM && (
-        <LoginForm changeFormHandler={() => setForm(SIGNUP_FORM)} />
+      {form === LOGIN_FORM && (
+        <LoginForm changeFormHandler={(form) => setFormHandler(form)} />
       )}
-      {!userIsSigning && form === SIGNUP_FORM && (
+      {form === SIGNUP_FORM && (
         <SignupForm changeFormHandler={() => setForm(LOGIN_FORM)} />
+      )}
+      {form === RESET_PASSWORD_FORM && (
+        <ResetPasswordForm changeFormHandler={(form) => setFormHandler(form)} />
       )}
     </div>
   );

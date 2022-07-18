@@ -1,4 +1,6 @@
 export default interface AuthSlice {
   isAuth: boolean;
-  isSigning: boolean;
+  isLoading: boolean;
+  token: string;
+  error: string;
 }

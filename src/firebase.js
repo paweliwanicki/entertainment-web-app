@@ -3,20 +3,9 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
   getAuth,
-  // signInWithPopup,
-  // signInWithEmailAndPassword,
-  // createUserWithEmailAndPassword,
-  // sendPasswordResetEmail,
-  // signOut,
 } from "firebase/auth";
 import {
   getFirestore,
-  // query,
-  // getDocs,
-  // collection,
-  // where,
-  // addDoc,
-  // from,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries

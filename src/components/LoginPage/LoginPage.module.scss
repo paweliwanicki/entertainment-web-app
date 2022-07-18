@@ -16,6 +16,16 @@
   .loginForm,
   .signupForm {
 
+    .infoBox {
+      background-color: default.$blue-light;
+      color: default.$blue-dark;
+      border-radius: 5px;
+      margin-bottom:15px;
+      text-align: justify;
+      padding:5px 10px;
+      font-weight: 500;
+    }
+
     form {
       font-weight: 300;
 
@@ -26,6 +36,13 @@
 
       .customInput {
         margin-top: 24px;
+      }
+
+      .resetPasswordLink {
+        color: default.$red;
+        justify-content: end;
+        margin-top:10px;
+        cursor: pointer;
       }
     }
 
