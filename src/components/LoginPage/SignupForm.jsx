@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./LoginPage.module.scss";
 import Button from "../utils/Button/Button";
 import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
-import { useDispatch } from "react-redux";
-import { createNewUser } from "../../reducers/authorizationSlice";
+import { getMessage, loginUser, setError, setStatus } from "../../reducers/authorizationSlice";
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import { auth } from "../../firebase";
+import { getErrorMessage } from "./Errors";
+import {SUCCESS, ERROR} from '../../utils/mixins';
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -23,6 +27,9 @@ const SignupForm = (props) => {
   const [passwordIsValidated, setPasswordIsValidated] = useState(null);
   const [password2IsValid, setPassword2IsValid] = useState(null);
   const [password2IsValidated, setPassword2IsValidated] = useState(null);
+
+  const message = useSelector(getMessage);
+  console.log(message);
 
   const validateEmailAddress = (email) => {
     return email
@@ -58,21 +65,24 @@ const SignupForm = (props) => {
   const registerNewUser = () => {
     const isValid = validateForm();
     if (isValid) {
-      try {
-        const newUser = {
-          email: email,
-          password: password2,
-        };
-        dispatch(createNewUser(newUser));
-      } catch (err) {
-        alert(err.message);
-      }
+        createUserWithEmailAndPassword(auth, email,password2)
+        .then(userAuth => {
+          console.log(userAuth)
+          dispatch(setStatus(SUCCESS));
+          dispatch(loginUser(userAuth));
+        })
+        .catch(error => {
+          console.log(error.code);
+          dispatch(setStatus(ERROR));
+          dispatch(setError(getErrorMessage(error.code)));
+        })
+      } 
     }
-  };
 
   return (
     <div className={[classes.signupForm, classes.fadeIn].join(" ")}>
       <CustomHeader mainText="Sign up" />
+      {message && <TextBox text={message} classNames={classes.infoBox}></TextBox>}
       <FormContainer
         classes={classes.formContainer}
         onSubmitHandler={registerNewUser}

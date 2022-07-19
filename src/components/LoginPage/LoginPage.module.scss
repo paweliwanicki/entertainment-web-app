@@ -66,6 +66,14 @@
     }
   }
 
+  .success {
+    background-color: default.$green;
+  }
+
+  .error {
+    background-color: default.$red;
+  }
+
   @include default.respond-to(bp-small) {}
 
   @include default.respond-to(bp-very-small) {

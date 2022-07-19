@@ -2,5 +2,7 @@ export default interface AuthSlice {
   isAuth: boolean;
   isLoading: boolean;
   token: string;
-  error: string;
+  message: string;
+  user: object | null;
+  status: string;
 }

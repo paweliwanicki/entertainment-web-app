@@ -6,14 +6,14 @@ import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
-import { resetPassword, getErrorCode } from "../../reducers/authorizationSlice";
+import { resetPassword, getMessage } from "../../reducers/authorizationSlice";
 import { SIGNUP_FORM, LOGIN_FORM } from "../../utils/mixins";
 
 const ResetPasswordForm = (props) => {
   const dispatch = useDispatch();
 
-  const error = useSelector(getErrorCode);
-  console.log(error);
+  const message = useSelector(getMessage);
+  console.log(message);
 
   const [email, setEmail] = useState("");
 
@@ -29,7 +29,6 @@ const ResetPasswordForm = (props) => {
 
   const resetPasswordHandler = () => {
     const valid = validateForm();
-    console.log(valid);
     if (valid) {
       try {
         dispatch(() => resetPassword(email));
@@ -42,7 +41,7 @@ const ResetPasswordForm = (props) => {
   return (
     <div className={[classes.loginForm, classes.fadeIn].join(" ")}>
       <CustomHeader mainText="Reset password" />
-        <TextBox text={"E-mail with password reset instruction was send. Please check your e-mail inbox."} classNames={classes.infoBox}></TextBox>
+      <TextBox text={message} classNames={classes.infoBox}></TextBox>
 
       <FormContainer
         classes={classes.formContainer}

@@ -8,12 +8,15 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
+import { getErrorMessage } from "../components/LoginPage/Errors";
 
 const initialState: AuthSlice = {
   isAuth: false,
   isLoading: false,
-  error: "",
+  message: "",
   token: "",
+  user: null,
+  status: "",
 };
 
 export const authorizationSlice = createSlice({
@@ -22,7 +25,6 @@ export const authorizationSlice = createSlice({
   reducers: {
     setIsAuthenticated: (state, action) => {
       state.isAuth = action.payload;
-      console.log(state.isAuth);
     },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
@@ -47,19 +49,18 @@ export const authorizationSlice = createSlice({
         .then((dataBeforeEmail) => {
           auth.onAuthStateChanged(function (user) {
             console.log(user);
+            state.user = user;
             //user.sendEmailVerification();
+            state.isLoading = false;
           });
         })
-        .then((value) => {
-          console.log(value);
-        })
         .catch((error) => {
-          console.log(error);
+          const errorMsg = getErrorMessage(error.code);
+          console.log(errorMsg);
+          state.message = errorMsg;
+
+          state.isLoading = false;
         });
-      // if(res) {
-      //   state.isAuth= true;
-      // }
-      state.isLoading = false;
     },
     resetPassword: (state, action) => {
       const res = sendPasswordResetEmail(auth, action.payload);
@@ -68,11 +69,19 @@ export const authorizationSlice = createSlice({
           console.log(value);
         })
         .catch((error) => {
+          state.message = getErrorMessage(error.message);
           console.log(error);
         });
     },
-    logoutUser: () => {
+    logoutUser: (state) => {
       signOut(auth);
+      state.user = null;
+    },
+    setError: (state, action) => {
+      state.message = action.payload;
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload;
     },
   },
 });
@@ -83,11 +92,15 @@ export const {
   createNewUser,
   loginUser,
   resetPassword,
+  setError,
+  setStatus,
 } = authorizationSlice.actions;
 
 export const isAuth = (state: RootState): boolean => state.authorization.isAuth;
 export const isSigning = (state: RootState): boolean =>
   state.authorization.isLoading;
-export const getErrorCode = (state: RootState): string =>
-  state.authorization.error;
+export const getMessage = (state: RootState): string =>
+  state.authorization.message;
+export const getStatus = (state: RootState): string =>
+  state.authorization.status;
 export default authorizationSlice.reducer;
