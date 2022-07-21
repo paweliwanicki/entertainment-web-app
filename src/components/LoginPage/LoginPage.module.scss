@@ -17,13 +17,10 @@
   .signupForm {
 
     .infoBox {
-      background-color: default.$blue-light;
-      color: default.$blue-dark;
       border-radius: 5px;
-      margin-bottom:15px;
+      margin-bottom:25px;
       text-align: justify;
       padding:5px 10px;
-      font-weight: 500;
     }
 
     form {
@@ -43,6 +40,10 @@
         justify-content: end;
         margin-top:10px;
         cursor: pointer;
+      }
+
+      .loader {
+        margin-top:50px;
       }
     }
 
@@ -66,13 +67,6 @@
     }
   }
 
-  .success {
-    background-color: default.$green;
-  }
-
-  .error {
-    background-color: default.$red;
-  }
 
   @include default.respond-to(bp-small) {}
 

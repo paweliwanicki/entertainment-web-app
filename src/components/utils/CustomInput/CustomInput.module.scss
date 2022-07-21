@@ -70,6 +70,7 @@
     &:-webkit-autofill:focus,
     &:-internal-autofill-selected {
       background-color: transparent !important;
+      display: none;
     }
 
     &::placeholder {
@@ -91,13 +92,6 @@
       }
     }
 
-    @include default.respond-to(bp-very-small) {
-      // width: 100%;
-      // background-color: default.$blue-middle;
-      // border-radius: 2em;
-      // height: 46px;
-      // max-width: 100%;
-    }
   }
 }
 

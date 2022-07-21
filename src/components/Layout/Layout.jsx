@@ -1,12 +1,22 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LoginPage from "../LoginPage/LoginPage";
 import MainContainer from "../MainContainer/MainContainer";
 import Icon from "../utils/Icon/Icon";
 import classes from "./Layout.module.scss";
-import { isAuth } from "../../reducers/authorizationSlice";
+import { getUser,loginUser } from "../../reducers/authorizationSlice";
+import {auth} from '../../firebase';
 
 function Layout() {
-  const isAuthenticated = useSelector(isAuth);
+
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(getUser);
+
+  if(!isAuthenticated) {
+    auth.onAuthStateChanged(function (user) {
+      dispatch(loginUser(user));
+     });
+    
+  }
   return (
     <div className={classes.layout}>
       {!isAuthenticated && (

@@ -1,11 +1,19 @@
 import classes from "./TextBox.module.scss";
 import propTypes from "prop-types";
+import { SUCCESS } from "../../../utils/mixins";
 
 const TextBox = (props) => {
   const textColor = props.color;
-  const classNames = props.classNames
-    ? [classes.textBox, props.classNames].join(" ")
-    : classes.textBox;
+  let alertBoxClasses;
+  if(props.status) {
+    alertBoxClasses = props.status === SUCCESS ? classes.success : classes.error;
+  } 
+
+  let classNames = [alertBoxClasses, classes.textBox].join(" ");
+
+  classNames = props.classNames
+    ? [classNames, props.classNames].join(" ")
+    : classNames;
 
   return (
     <div className={classNames} onClick={props.onClick}>

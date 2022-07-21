@@ -4,7 +4,7 @@
   font-size: inherit;
   line-height: inherit;
   color: default.$white;
-  display: flex; 
+  display: flex;
   justify-content: center;
   font-family: default.$font-family;
 
@@ -25,4 +25,15 @@
     line-height: 1.56rem;
     margin-bottom: 0;
   }
+}
+
+
+.success {
+  background-color: default.$green-light;
+  color: default.$blue-dark;
+}
+
+.error {
+  background-color: default.$red;
+  color: default.$white;
 }

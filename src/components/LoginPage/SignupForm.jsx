@@ -6,11 +6,17 @@ import CustomInput from "../utils/CustomInput/CustomInput";
 import CustomHeader from "../utils/CustomHeader/CustomHeader";
 import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
-import { getMessage, loginUser, setError, setStatus } from "../../reducers/authorizationSlice";
-import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {
+  getMessage,
+  getStatus,
+  loginUser,
+  setMessage,
+  setStatus,
+} from "../../reducers/authorizationSlice";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { getErrorMessage } from "./Errors";
-import {SUCCESS, ERROR} from '../../utils/mixins';
+import { getErrorMessage } from "./Messages";
+import { SUCCESS, ERROR } from "../../utils/mixins";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -29,7 +35,7 @@ const SignupForm = (props) => {
   const [password2IsValidated, setPassword2IsValidated] = useState(null);
 
   const message = useSelector(getMessage);
-  console.log(message);
+  const status = useSelector(getStatus);
 
   const validateEmailAddress = (email) => {
     return email
@@ -65,24 +71,35 @@ const SignupForm = (props) => {
   const registerNewUser = () => {
     const isValid = validateForm();
     if (isValid) {
-        createUserWithEmailAndPassword(auth, email,password2)
-        .then(userAuth => {
-          console.log(userAuth)
+      createUserWithEmailAndPassword(auth, email, password2)
+        .then((userAuth) => {
           dispatch(setStatus(SUCCESS));
-          dispatch(loginUser(userAuth));
+          dispatch(
+            loginUser({
+              email: userAuth.user.email,
+              uid: userAuth.user.uid,
+              displayName: userAuth.user.displayName,
+              photoUrl: userAuth.user.photoURL,
+            })
+          );
         })
-        .catch(error => {
-          console.log(error.code);
+        .catch((error) => {
           dispatch(setStatus(ERROR));
-          dispatch(setError(getErrorMessage(error.code)));
-        })
-      } 
+          dispatch(setMessage(getErrorMessage(error.code)));
+        });
     }
+  };
 
   return (
     <div className={[classes.signupForm, classes.fadeIn].join(" ")}>
       <CustomHeader mainText="Sign up" />
-      {message && <TextBox text={message} classNames={classes.infoBox}></TextBox>}
+      {message && (
+        <TextBox
+          text={message}
+          classNames={classes.infoBox}
+          status={status}
+        ></TextBox>
+      )}
       <FormContainer
         classes={classes.formContainer}
         onSubmitHandler={registerNewUser}
@@ -127,10 +144,7 @@ const SignupForm = (props) => {
           autoComplete="on"
           classNames={classes.customInput}
         />
-        {
-          
-        <Button type="submit" text="Create an account" />
-        }
+        {<Button type="submit" text="Create an account" />}
       </FormContainer>
       <TextBox
         text="Already have an account?"
