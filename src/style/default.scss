@@ -9,7 +9,8 @@ $green-light: #75d86a;
 $red: #FC4747;
 
 // fonts
-$font-family:'Outfit', sans-serif;
+$font-family:'Outfit',
+sans-serif;
 
 // buttons 
 $button-primary-color: $red;
@@ -27,19 +28,35 @@ $input-placeholder-color: #b4b2b2;
 
 // media query breakpoints 
 @mixin respond-to($breakpoint) {
-  @if $breakpoint == bp-very-small {
-    @media only screen and (max-width: 28em) { @content }; 
+  @if $breakpoint==bp-very-small {
+    @media only screen and (max-width: 28em) {
+      @content
+    }
+
+    ;
   }
 
-  @if $breakpoint == bp-small {
-    @media only screen and (max-width: 48.05em) { @content }; 
+  @if $breakpoint==bp-small {
+    @media only screen and (max-width: 48.05em) {
+      @content
+    }
+
+    ;
   }
 
-  @if $breakpoint == bp-medium {
-    @media only screen and (max-width: 62.5em) { @content }; 
+  @if $breakpoint==bp-medium {
+    @media only screen and (max-width: 62.5em) {
+      @content
+    }
+
+    ;
   }
 
-  @if $breakpoint == bp-large {
-    @media only screen and (max-width: 80.5em) { @content }; 
+  @if $breakpoint==bp-large {
+    @media only screen and (max-width: 80.5em) {
+      @content
+    }
+
+    ;
   }
 }

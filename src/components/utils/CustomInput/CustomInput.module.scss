@@ -3,15 +3,6 @@
 .inputContainer {
   position: relative;
 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-internal-autofill-selected,
-  input:-internal-autofill-previewed {
-    background-color: transparent !important;
-    color: default.$white;
-  }
-
   @include default.respond-to(bp-very-small) {
     width: 100%;
     max-width: 100%;
@@ -65,14 +56,6 @@
     font-family: default.$font-family;
     border-bottom-width: 1px;
 
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-internal-autofill-selected {
-      background-color: transparent !important;
-      display: none;
-    }
-
     &::placeholder {
       color: default.$input-placeholder-color;
       opacity: 0.5;
@@ -87,7 +70,6 @@
 
       &::placeholder {
         color: default.$white;
-        ;
         opacity: 1;
       }
     }

@@ -29,7 +29,7 @@ const Icon = (props) => {
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
       data-id={props.id}
-      className={props.classes}
+      className={props.classNames}
       onClick={props.onClick}
     >
       <use href={Icons + `#${props.id}`} />
@@ -44,6 +44,8 @@ Icon.propTypes = {
   color: propTypes.string,
   viewBox: propTypes.string,
   onClick: propTypes.func,
+  classNames: propTypes.string,
+  hoverColor: propTypes.string,
 };
 
 Icon.defaultProps = {
@@ -52,6 +54,8 @@ Icon.defaultProps = {
   color: "",
   viewBox: "",
   onClick: null,
+  classNames: "",
+  hoverColor: "",
 };
 
 export default Icon;

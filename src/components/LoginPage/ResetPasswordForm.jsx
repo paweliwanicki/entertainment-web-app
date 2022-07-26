@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import propTypes from "prop-types";
 import classes from "./LoginPage.module.scss";
 import { auth } from "../../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
@@ -23,6 +24,7 @@ import TextBox from "../utils/TextBox/TextBox";
 import FormContainer from "../utils/FormContainer/FormContainer";
 import Loader from "../utils/Loader/Loader";
 import { SIGNUP_FORM, LOGIN_FORM, SUCCESS, ERROR } from "../../utils/mixins";
+import { validateEmailAddress } from "../../utils/utils";
 
 const ResetPasswordForm = (props) => {
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ const ResetPasswordForm = (props) => {
   const [emailIsValidated, setEmailIsValidated] = useState(null);
 
   const validateForm = () => {
-    const validEmail = email !== "";
+    const validEmail = validateEmailAddress(email);
     setEmailIsValid(validEmail);
     setEmailIsValidated(true);
     return validEmail;
@@ -52,7 +54,7 @@ const ResetPasswordForm = (props) => {
           dispatch(setMessage(getMessageText(RESET_EMAIL_SENDED)));
           dispatch(setStatus(SUCCESS));
           dispatch(setIsLoading(false));
-          setEmail('');
+          setEmail("");
         })
         .catch((error) => {
           dispatch(setStatus(ERROR));
@@ -64,7 +66,7 @@ const ResetPasswordForm = (props) => {
 
   return (
     <div className={[classes.loginForm, classes.fadeIn].join(" ")}>
-      <CustomHeader mainText="Reset password" />
+      <CustomHeader text="Reset password" />
       {message && (
         <TextBox
           text={message}
@@ -73,10 +75,7 @@ const ResetPasswordForm = (props) => {
         ></TextBox>
       )}
 
-      <FormContainer
-        classes={classes.formContainer}
-        onSubmitHandler={resetPasswordHandler}
-      >
+      <FormContainer onSubmitHandler={resetPasswordHandler}>
         <CustomInput
           id="email"
           name="email"
@@ -86,7 +85,6 @@ const ResetPasswordForm = (props) => {
           validationText="Can't be empty"
           isValid={emailIsValid}
           isValidated={emailIsValidated}
-          autoComplete="off"
           onBlur={() => setEmailIsValidated(false)}
         />
         {showLoader ? (
@@ -116,6 +114,10 @@ const ResetPasswordForm = (props) => {
       </TextBox>
     </div>
   );
+};
+
+ResetPasswordForm.propTypes = {
+  changeFormHandler: propTypes.func.isRequired,
 };
 
 export default ResetPasswordForm;

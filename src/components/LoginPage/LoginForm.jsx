@@ -1,4 +1,5 @@
 import { useState } from "react";
+import propTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./LoginPage.module.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -25,6 +26,7 @@ import {
   SUCCESS,
   ERROR,
 } from "../../utils/mixins";
+import { validateEmailAddress, validatePassword } from "../../utils/utils";
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
@@ -41,8 +43,8 @@ const LoginForm = (props) => {
   const [passwordIsValidated, setPasswordIsValidated] = useState(null);
 
   const validateForm = () => {
-    const validEmail = email !== "";
-    const validPassword = password !== "";
+    const validEmail = validateEmailAddress(email);
+    const validPassword = validatePassword(password);
     setEmailIsValid(validEmail);
     setEmailIsValidated(true);
     setPasswordIsValid(validPassword);
@@ -77,7 +79,7 @@ const LoginForm = (props) => {
 
   return (
     <div className={[classes.loginForm, classes.fadeIn].join(" ")}>
-      <CustomHeader mainText="Login" />
+      <CustomHeader text="Login" />
       {message && (
         <TextBox
           text={message}
@@ -85,10 +87,7 @@ const LoginForm = (props) => {
           status={status}
         ></TextBox>
       )}
-      <FormContainer
-        classes={classes.formContainer}
-        onSubmitHandler={loginHandler}
-      >
+      <FormContainer onSubmitHandler={loginHandler}>
         <CustomInput
           id="email"
           name="email"
@@ -98,7 +97,6 @@ const LoginForm = (props) => {
           validationText="Can't be empty"
           isValid={emailIsValid}
           isValidated={emailIsValidated}
-          autoComplete="off"
           onBlur={() => setEmailIsValidated(false)}
         />
         <CustomInput
@@ -136,6 +134,10 @@ const LoginForm = (props) => {
       </TextBox>
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  changeFormHandler: propTypes.func.isRequired,
 };
 
 export default LoginForm;

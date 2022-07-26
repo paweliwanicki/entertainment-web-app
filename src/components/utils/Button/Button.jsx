@@ -1,9 +1,7 @@
-
 import classes from "./Button.module.scss";
 import propTypes from "prop-types";
 
 const Button = (props) => {
-
   return (
     <button
       className={classes.customButton}
@@ -17,10 +15,17 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  type: propTypes.string,
   onClick: propTypes.func,
+  type: propTypes.string,
   text: propTypes.string,
   disabled: propTypes.bool,
+};
+
+Button.defaultProps = {
+  type: "button",
+  text: "",
+  disabled: false,
+  onClick: null,
 };
 
 export default Button;

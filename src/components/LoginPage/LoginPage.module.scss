@@ -12,19 +12,17 @@
   box-sizing: border-box;
   min-height: 373px;
 
-
   .loginForm,
   .signupForm {
 
     .infoBox {
       border-radius: 5px;
-      margin-bottom:25px;
+      margin-bottom: 25px;
       text-align: justify;
-      padding:5px 10px;
+      padding: 5px 10px;
     }
 
     form {
-      font-weight: 300;
 
       button {
         margin-top: 40px;
@@ -38,12 +36,12 @@
       .resetPasswordLink {
         color: default.$red;
         justify-content: end;
-        margin-top:10px;
+        margin-top: 10px;
         cursor: pointer;
       }
 
       .loader {
-        margin-top:50px;
+        margin-top: 50px;
       }
     }
 
@@ -66,9 +64,6 @@
       }
     }
   }
-
-
-  @include default.respond-to(bp-small) {}
 
   @include default.respond-to(bp-very-small) {
     width: 94%;

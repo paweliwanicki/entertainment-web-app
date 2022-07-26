@@ -2,17 +2,21 @@ import classes from "./CustomImage.module.scss";
 import propTypes from "prop-types";
 
 const CustomImage = (props) => {
-  const className = classes[props.className]
-    ? classes[props.className]
-    : props.className;
+  const defaultClassNames = props.classNames
+    ? [classes.customImage, props.classNames].join(" ")
+    : classes.customImage;
 
-  return <img src={props.src} alt={props.alt} className={className} />;
+  return <img src={props.src} alt={props.alt} className={defaultClassNames} />;
 };
 
 CustomImage.propTypes = {
-  src: propTypes.string,
-  alt: propTypes.string,
-  className: propTypes.string,
+  src: propTypes.string.isRequired,
+  alt: propTypes.string.isRequired,
+  classNames: propTypes.string,
+};
+
+CustomImage.defaultProps = {
+  classNames: "",
 };
 
 export default CustomImage;

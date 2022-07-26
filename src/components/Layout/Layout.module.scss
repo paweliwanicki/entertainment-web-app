@@ -14,9 +14,4 @@
 
   }
 
-  @include default.respond-to(bp-small) {}
-
-  @include default.respond-to(bp-very-small) {}
-
-
 }

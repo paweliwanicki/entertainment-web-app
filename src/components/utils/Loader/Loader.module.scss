@@ -2,11 +2,7 @@
 @use '../../../style//animations.scss';
 
 .loader {
-  width:250px;
-  height:auto;
-  margin:auto;
-
-  @include default.respond-to(bp-very-small) {
-    
-  }
+  width: 250px;
+  height: auto;
+  margin: auto;
 }

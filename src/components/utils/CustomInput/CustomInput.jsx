@@ -1,11 +1,23 @@
 import classes from "./CustomInput.module.scss";
 import propTypes from "prop-types";
-import Loader from "../Loader/Loader";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const CustomInput = (props) => {
   let validClassName = "";
-  if (props.isValidated) {
+
+  const isValidated = props.isValidated;
+  const validationText = props.validationText;
+  const labelInfo = props.labelInfoText;
+
+  const labelText = labelInfo ? (
+    <div title={labelInfo}>
+      <InfoOutlinedIcon />
+    </div>
+  ) : (
+    ""
+  );
+
+  if (isValidated) {
     validClassName = props.isValid ? classes.isValid : classes.isInvalid;
   }
 
@@ -20,15 +32,6 @@ const CustomInput = (props) => {
 
   const inputClassNames = [classes.customInput, validClassName].join(" ");
 
-  const validationText = props.validationText;
-  let labelText = "";
-  const labelInfo = props.labelInfoText;
-  labelText = labelInfo ? (
-    <div title={labelInfo}>
-      <InfoOutlinedIcon />
-    </div>
-  ) : null;
-
   return (
     <div className={classNames}>
       <input
@@ -42,9 +45,6 @@ const CustomInput = (props) => {
         onChange={props.onChange}
         autoComplete={props.autoComplete}
       />
-      {props.isSending && props.showLoader && (
-        <Loader className={classes.customInputLoader} />
-      )}
       {props.isValidated && !props.isValid ? (
         <label
           className={[classes.customLabel, validClassName].join(" ")}
@@ -63,10 +63,18 @@ const CustomInput = (props) => {
 
 CustomInput.propTypes = {
   id: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
+  onBlur: propTypes.func,
   type: propTypes.string,
   value: propTypes.string,
   placeholder: propTypes.string,
   ref: propTypes.string,
+  autoComplete: propTypes.string,
+  classNames: propTypes.string,
+  labelInfoText: propTypes.string,
+  validationText: propTypes.string,
+  isValid: propTypes.bool,
+  isValidated: propTypes.bool,
 };
 
 CustomInput.defaultProps = {
@@ -74,6 +82,13 @@ CustomInput.defaultProps = {
   value: undefined,
   placeholder: "",
   ref: null,
+  autoComplete: "off",
+  classNames: "",
+  labelInfoText: "",
+  validationText: "",
+  onBlur: null,
+  isValid: null,
+  isValidated: false,
 };
 
 export default CustomInput;

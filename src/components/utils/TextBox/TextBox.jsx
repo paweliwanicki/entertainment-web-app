@@ -4,16 +4,18 @@ import { SUCCESS } from "../../../utils/mixins";
 
 const TextBox = (props) => {
   const textColor = props.color;
-  let alertBoxClasses;
-  if(props.status) {
-    alertBoxClasses = props.status === SUCCESS ? classes.success : classes.error;
-  } 
+  let alertBoxClasses = "";
 
-  let classNames = [alertBoxClasses, classes.textBox].join(" ");
+  if (props.status) {
+    alertBoxClasses =
+      props.status === SUCCESS ? classes.success : classes.error;
+  }
 
-  classNames = props.classNames
-    ? [classNames, props.classNames].join(" ")
-    : classNames;
+  const defaultClassNames = [alertBoxClasses, classes.textBox].join(" ");
+
+  const classNames = props.classNames
+    ? [defaultClassNames, props.classNames].join(" ")
+    : defaultClassNames;
 
   return (
     <div className={classNames} onClick={props.onClick}>
@@ -26,12 +28,18 @@ const TextBox = (props) => {
 TextBox.propTypes = {
   text: propTypes.string.isRequired,
   color: propTypes.string,
+  classNames: propTypes.string,
   children: propTypes.node,
+  onClick: propTypes.func,
+  status: propTypes.string,
 };
 
 TextBox.defaultProps = {
   color: "",
+  classNames: "",
   children: null,
+  onClick: null,
+  status: "",
 };
 
 export default TextBox;

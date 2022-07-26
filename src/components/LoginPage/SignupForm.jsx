@@ -17,6 +17,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { getErrorMessage } from "./Messages";
 import { SUCCESS, ERROR } from "../../utils/mixins";
+import { validateEmailAddress, validatePassword } from "../../utils/utils";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -37,27 +38,14 @@ const SignupForm = (props) => {
   const message = useSelector(getMessage);
   const status = useSelector(getStatus);
 
-  const validateEmailAddress = (email) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
-  const validatePassword = (password) => {
-    const regex =
-      /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z0-9!@#$%^&*()~¥=_+}{":;'?/>.<,`\-|[\]]{6,50}$/;
-    return regex.test(password);
-  };
-
   const validateForm = () => {
     const validEmail = validateEmailAddress(email);
     if (email !== "" && !validEmail) {
       setEmailError("Wrong e-mail address");
     }
-    const validPassword = password !== "" && validatePassword(password);
-    const validPassword2 = password2 !== "" && password === password2;
+    const validPassword = validatePassword(password);
+    const validPassword2 =
+      password2 !== "" && password === password2 && validPassword;
     validatePassword(password);
     setEmailIsValid(validEmail);
     setPasswordIsValid(validPassword);
@@ -92,7 +80,7 @@ const SignupForm = (props) => {
 
   return (
     <div className={[classes.signupForm, classes.fadeIn].join(" ")}>
-      <CustomHeader mainText="Sign up" />
+      <CustomHeader text="Sign up" />
       {message && (
         <TextBox
           text={message}
@@ -100,10 +88,7 @@ const SignupForm = (props) => {
           status={status}
         ></TextBox>
       )}
-      <FormContainer
-        classes={classes.formContainer}
-        onSubmitHandler={registerNewUser}
-      >
+      <FormContainer onSubmitHandler={registerNewUser}>
         <CustomInput
           id="email"
           name="email"
@@ -114,7 +99,6 @@ const SignupForm = (props) => {
           validationText={emailError}
           isValid={emailIsValid}
           isValidated={emailIsValidated}
-          autoComplete="off"
         />
         <CustomInput
           id="password"

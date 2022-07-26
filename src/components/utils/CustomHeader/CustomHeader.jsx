@@ -2,16 +2,15 @@ import classes from "./CustomHeader.module.scss";
 import propTypes from "prop-types";
 
 const CustomHeader = (props) => {
-  return (
-    <h2 className={classes.customHeader}>
-      {props.mainText}
-    </h2>
-  );
+  return <h2 className={classes.customHeader}>{props.text}</h2>;
 };
 
 CustomHeader.propTypes = {
-  mainText: propTypes.string,
   text: propTypes.string,
+};
+
+CustomHeader.defaultProps = {
+  text: "",
 };
 
 export default CustomHeader;

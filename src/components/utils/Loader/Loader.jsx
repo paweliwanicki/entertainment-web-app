@@ -1,12 +1,21 @@
 import loaderGif from "./loader.gif";
 import classes from "./Loader.module.scss";
+import propTypes from "prop-types";
 
 const Loader = (props) => {
-  let classNames = [classes.loader, classes.slideFwdCenter].join(" ");
-  classNames = props.classNames
-    ? [classNames, props.classNames].join(" ")
-    : classNames;
+  const defaultClassNames = [classes.loader, classes.slideFwdCenter].join(" ");
+  const classNames = props.classNames
+    ? [defaultClassNames, props.classNames].join(" ")
+    : defaultClassNames;
   return <img src={loaderGif} alt={`loader`} className={classNames} />;
+};
+
+Loader.propTypes = {
+  classNames: propTypes.string,
+};
+
+Loader.defaultProps = {
+  classNames: "",
 };
 
 export default Loader;

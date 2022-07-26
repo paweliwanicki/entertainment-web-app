@@ -11,7 +11,7 @@ import {
   RESET_PASSWORD_FORM,
 } from "../../utils/mixins";
 
-const LoginPage = (props) => {
+const LoginPage = () => {
   const [form, setForm] = useState(LOGIN_FORM);
   const dispatch = useDispatch();
   const message = useSelector(getMessage);
